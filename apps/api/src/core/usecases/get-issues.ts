@@ -5,19 +5,19 @@ import { IWork } from "../domains/work";
 import { ConflictError } from "../errors/conflict-error";
 import { WorkReflectorRepositoryInMemory } from "../repositories/inmemory-impl/work-reflector-repository";
 
-interface GetTeamsRequest {}
+interface GetIssuesRequest {}
 
-interface GetTeamsResponse {
+interface GetIssuesResponse {
   body?: Flatted<IWork>[] | ConflictError;
   status: 200;
 }
 
-export class GetTeamsUseCase {
+export class GetIssuesUseCase {
   constructor(
     private readonly workReflectorRepositoryInMemory: WorkReflectorRepositoryInMemory
   ) {}
 
-  async execute(_req: GetTeamsRequest): Promise<GetTeamsResponse> {
+  async execute(_req: GetIssuesRequest): Promise<GetIssuesResponse> {
     const existing = await this.workReflectorRepositoryInMemory.queryIssueds();
 
     return {
