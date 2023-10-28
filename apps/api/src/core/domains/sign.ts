@@ -7,7 +7,7 @@ export interface ISign {
   updated_at: string | null
   deleted_at: string | null
 
-  work?: Work
+  works?: Work[]
 }
 
 export class Sign extends BaseEntity<ISign> {
