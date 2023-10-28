@@ -5,7 +5,7 @@ import { ConflictError } from "../errors/conflict-error";
 import { SignRepository } from "../repositories/sign-repository";
 import { WorkReflectorRepository } from "../repositories/work-reflector-repository";
 import { Sign } from "../domains/sign";
-import { IWork, Work, WorkStatus, Worktype } from "../domains/work";
+import { IWork, Work, WorkStatus, WorkType } from "../domains/work";
 import { Reflector, ReflectorColor, ReflectorDirection } from "../domains/reflector";
 import { ReflectorMeasurements, ReflectorMeasures } from "../domains/object-values.ts/reflectometer-measurements";
 
@@ -15,7 +15,7 @@ interface MakeSignInspectRequest {
   device_coord: [x: string, y:string]
   pictures: string[]
   status: WorkStatus
-  work_type: Worktype
+  work_type: WorkType
   code: string
   color: [ReflectorColor]
   direction: ReflectorDirection

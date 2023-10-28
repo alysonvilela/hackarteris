@@ -18,4 +18,12 @@ export class WorkReflectorRepositoryInMemory implements WorkReflectorRepository 
   async register(work: Work): Promise<void> {
     this.db.push(work)
   }
+
+  async queryByWorkId(id: string): Promise<Work | null> {
+    const work = this.db.find(item => item.flatted.id === id)
+
+    if(!work) return null
+
+    return work
+  }
 }

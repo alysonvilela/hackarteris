@@ -3,12 +3,12 @@ import { Optional } from "../../utils/optional";
 import { Reflector } from "./reflector";
 
 export type WorkStatus = "DEMAGED" | "LOW_REFLETANCE" | "OK";
-export type Worktype = "MONITORING" | "CONSERVATION";
+export type WorkType = "MONITORING" | "CONSERVATION";
 
 export interface IWork {
   sign_id: string;
   author: string; // Should be a ref for a user (author_id)
-  work_type: "MONITORING" | "CONSERVATION";
+  work_type: WorkType;
   status: WorkStatus;
   device_coord: [x: string, y: string];
   pictures: string[];
