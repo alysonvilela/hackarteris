@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  whatsapp-http-api:
+    image: devlikeapro/whatsapp-http-api
+    ports:
+      - "3002:3000/tcp"
+    stdin_open: true
+    tty: true
+    container_name: whatsapp-http

@@ -1,0 +1,1 @@
+export const formatDateToCron = (date: Date) => date.toISOString().slice(8,10)
