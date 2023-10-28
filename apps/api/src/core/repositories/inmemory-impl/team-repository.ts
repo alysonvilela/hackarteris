@@ -6,6 +6,7 @@ export class TeamRepositoryInMemory implements TeamRepository {
   private static instance: TeamRepositoryInMemory;
 
   private constructor() {}
+
   static getInstance(): TeamRepositoryInMemory {
     if (!TeamRepositoryInMemory.instance) {
       TeamRepositoryInMemory.instance = new TeamRepositoryInMemory();
@@ -14,13 +15,26 @@ export class TeamRepositoryInMemory implements TeamRepository {
     return TeamRepositoryInMemory.instance;
   }
 
-  async queryByChargeId(chargeId: string): Promise<Team | null> {
-    const team = this.db.find((i) => i.flatted.charge_id === chargeId);
-    if (team) {
-      return team;
-    }
-    return null;
+  async queryByWpGroupId(id: string): Promise<Team | null> {
+    const team = this.db.find(item => item.flatted.wp_group_id)
+
+    if(!team) return null
+
+    return team
   }
+  
+  async queryById(id: string): Promise<Team | null> {
+    const team = this.db.find(item => item.flatted.id === id)
+
+    if(!team) return null
+
+    return team
+  }
+
+  async queryAll(): Promise<Team[]> {
+    return this.db
+  }
+
   async register(team: Team): Promise<void> {
     this.db.push(team);
   }
