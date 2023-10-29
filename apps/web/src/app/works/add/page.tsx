@@ -48,10 +48,10 @@ const profileFormSchema = z.object({
   ),
 });
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+type AddWorkValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
+const defaultValues: Partial<AddWorkValues> = {
   ra: '',
   status: 'GOOD',
   pictures: [],
@@ -64,13 +64,13 @@ const defaultValues: Partial<ProfileFormValues> = {
 };
 
 export default function AddWork() {
-  const form = useForm<ProfileFormValues>({
+  const form = useForm<AddWorkValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: 'onChange',
   });
 
-  function onSubmit(data: ProfileFormValues) {
+  function onSubmit(data: AddWorkValues) {
     console.log(data);
   }
 
@@ -351,7 +351,7 @@ export default function AddWork() {
             disabled={form.getValues().measurements.length === 2}
             className="mt-2"
             onClick={() =>
-              append({ color: '', measures: [], average: 0, minimumValue: 0, filmType: '' })
+              append({ color: '', measures: [], average: '', minimumValue: '', filmType: '' })
             }
           >
             Adicionar medida
