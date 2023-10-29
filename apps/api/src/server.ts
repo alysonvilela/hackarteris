@@ -5,6 +5,7 @@ import cors from "cors";
 import { issues } from "./controllers/issues/route";
 import { teams } from "./controllers/team/route";
 import { works } from "./controllers/work/route";
+import { wahaProxy } from "./controllers/gw/route";
 
 export const createServer = () => {
   const app = express();
@@ -17,6 +18,7 @@ export const createServer = () => {
     .use(issues)
     .use(teams)
     .use(works)
+    .use(wahaProxy)
     .get("/message/:name", (req, res) => {
       return res.json({ message: `hello ${req.params.name}` });
     })
