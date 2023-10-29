@@ -23,55 +23,73 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import axios from 'axios';
 
-const profileFormSchema = z.object({
+const addWorkFormSchema = z.object({
   ra: z
     .string({
       required_error: 'Digite o RA da placa.',
     })
     .min(2),
-  status: z.string({
-    required_error: 'Selecione o estado em que a placa se encontra.',
-  }),
   pictures: z.any(),
+  status: z.string(),
   code: z.string(),
   direction: z.string(),
-  kilometerPosition: z.string(),
+  kilometer_position: z.string(),
   measurements: z.array(
     z.object({
       color: z.string(),
-      measures: z.array(z.string()),
-      average: z.string(),
-      minimumValue: z.string(),
-      filmType: z.string(),
+      measures: z.array(z.string()).max(5),
+      average: z.string().optional(),
+      minimum_value: z.string(),
+      film_type: z.string(),
     }),
   ),
 });
 
-type AddWorkValues = z.infer<typeof profileFormSchema>;
+type AddWorkValues = z.infer<typeof addWorkFormSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<AddWorkValues> = {
-  ra: '',
-  status: 'GOOD',
-  pictures: [],
-  code: '',
-  direction: '',
-  kilometerPosition: '',
-  measurements: [
-    { color: '', measures: ['', '', '', '', ''], average: '', minimumValue: '', filmType: '' },
-  ],
-};
+const defaultValues: Partial<AddWorkValues> = {};
 
 export default function AddWork() {
   const form = useForm<AddWorkValues>({
-    resolver: zodResolver(profileFormSchema),
+    resolver: zodResolver(addWorkFormSchema),
     defaultValues,
     mode: 'onChange',
   });
 
-  function onSubmit(data: AddWorkValues) {
-    console.log(data);
+  async function onSubmit(data: AddWorkValues) {
+    const body = {
+      author_name: 'John Doe', // Passado diretamente
+      device_coord: ['10.1234', '20.5678'], // Passado diretamente
+      pictures: [
+        'https://cdn.autopapo.com.br/box/uploads/2018/08/29144427/shutterstock_520257244.jpg',
+      ],
+      status: data.status,
+      work_type: 'MONITORING', // Passado diretamente
+      code: data.code,
+      direction: data.direction,
+      kilometer_position: data.kilometer_position,
+      measurements: data.measurements.map((measure) => {
+        console.log(measure);
+        return {
+          color: measure.color,
+          film_type: measure.film_type,
+          measures: measure.measures.map((measure) => Number(measure)),
+          average: Number(measure.average),
+          minimum_value: Number(measure.minimum_value),
+        };
+      }),
+    };
+    console.log('here', body);
+    try {
+      await axios.post(`http://localhost:3001/sign/${data.ra}`, body, {
+        headers: { 'x-api-key': '12345' },
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const { fields, append } = useFieldArray({
@@ -176,8 +194,8 @@ export default function AddWork() {
         />
         <FormField
           control={form.control}
-          name="kilometerPosition"
-          key={`field.kilometerPosition`}
+          name="kilometer_position"
+          key={`field.kilometer_position`}
           render={({ field }) => (
             <FormItem>
               <FormLabel>KM</FormLabel>
@@ -196,8 +214,8 @@ export default function AddWork() {
               <span className="mt-4 font-bold text-md">Nova medida</span>
               <FormField
                 control={form.control}
-                key={`${field.id}.${index}.filmType`}
-                name={`measurements.${index}.filmType`}
+                key={`${field.id}.${index}.film_type`}
+                name={`measurements.${index}.film_type`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={cn(index !== 0 && 'sr-only')}>Tipo da película</FormLabel>
@@ -257,8 +275,8 @@ export default function AddWork() {
                 />
                 <FormField
                   control={form.control}
-                  name={`measurements.${index}.minimumValue`}
-                  key={`${field.id}.${index}.minimumValue`}
+                  name={`measurements.${index}.minimum_value`}
+                  key={`${field.id}.${index}.minimum_value`}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Valor mínimo</FormLabel>
@@ -348,10 +366,16 @@ export default function AddWork() {
             type="button"
             variant="outline"
             size="sm"
-            disabled={form.getValues().measurements.length === 2}
+            disabled={false}
             className="mt-2"
             onClick={() =>
-              append({ color: '', measures: [], average: '', minimumValue: '', filmType: '' })
+              append({
+                color: 'YELLOW',
+                measures: [],
+                average: '',
+                minimum_value: '',
+                film_type: '',
+              })
             }
           >
             Adicionar medida
