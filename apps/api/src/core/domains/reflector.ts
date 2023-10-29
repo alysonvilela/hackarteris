@@ -9,10 +9,9 @@ export interface IReflector {
   work_id: string;
   kilometer_position: string;
   direction: ReflectorDirection;
-  film_type: string;
+
   code: string;
-  color: [ReflectorColor]
-  measurements: ReflectorMeasurements
+  measurements: ReflectorMeasurements[]
   created_at: string
 }
 

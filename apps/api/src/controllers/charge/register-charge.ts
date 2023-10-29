@@ -17,8 +17,6 @@ export const handler: Handler = async (req, res) => {
 
   const headerDto = headerSchema.safeParse(req.headers);
   
-  console.log({event: req.headers})
-
   if (!headerDto.success) {
     return { statusCode: 400, body: JSON.stringify(new BadRequest()) };
   }

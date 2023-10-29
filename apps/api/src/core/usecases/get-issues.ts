@@ -1,6 +1,4 @@
 import { Flatted } from "../base/entity";
-import { ISign } from "../domains/sign";
-import { ITeam, Team } from "../domains/team";
 import { IWork } from "../domains/work";
 import { ConflictError } from "../errors/conflict-error";
 import { WorkReflectorRepositoryInMemory } from "../repositories/inmemory-impl/work-reflector-repository";

@@ -1,15 +1,15 @@
-import { BaseEntity, Flatted } from "../../base/entity";
 import { Optional } from "../../../utils/optional";
 import { BaseObjectValue } from "../../base/object-value";
+import { ReflectorColor } from "../reflector";
 
 export type ReflectorMeasures = [m1: number, m2: number, m3: number, m4: number, m5: number]
-
 export interface IReflectorMeasurements {
   measures: ReflectorMeasures,
   average: number,
   minimum_value: number
+  color: ReflectorColor
+  film_type: string;
 }
-
 export class ReflectorMeasurements extends BaseObjectValue<IReflectorMeasurements> {
 
   static getAverage(measures: ReflectorMeasures) {

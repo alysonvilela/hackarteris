@@ -17,13 +17,15 @@ interface MakeSignInspectRequest {
   status: WorkStatus
   work_type: WorkType
   code: string
-  color: [ReflectorColor]
   direction: ReflectorDirection
-  film_type: string
   kilometer_position: string
-  measures: ReflectorMeasures,
-  average?: number,
-  minimum_value: number
+  measurements: {
+    color: ReflectorColor
+    film_type: string
+    measures: ReflectorMeasures,
+    average?: number,
+    minimum_value: number
+  }[]
 }
 
 interface MakeSignInspectResponse {
@@ -53,18 +55,24 @@ export class MakeSignInspectUseCase {
       work_type: req.work_type,
     })
 
+    let measurements: ReflectorMeasurements[] = []
+
+    for(let item of req.measurements) {
+      measurements = [...measurements,  ReflectorMeasurements.create({
+        measures: item.measures,
+        minimum_value: item.minimum_value,
+        average: item.average,
+        color: item.color,
+        film_type: item.film_type
+      })]
+    }
+
     const reflector = Reflector.create({
       work_id: work.id,
       code: req.code,
-      color: req.color,
       direction: req.direction,
-      film_type: req.film_type,
       kilometer_position: req.kilometer_position,
-      measurements: ReflectorMeasurements.create({
-        measures: req.measures,
-        minimum_value: req.minimum_value,
-        average: req.average
-      }),
+      measurements,
     })
 
     work.addReflector(reflector)
