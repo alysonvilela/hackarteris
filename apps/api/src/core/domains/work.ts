@@ -2,7 +2,7 @@ import { BaseEntity } from "../../core/base/entity";
 import { Optional } from "../../utils/optional";
 import { Reflector } from "./reflector";
 
-export type WorkStatus = "DEMAGED" | "LOW_REFLETANCE" | "OK";
+export type WorkStatus = "DAMAGE" | "LOW_REFLETANCE" | "OK";
 export type WorkType = "MONITORING" | "CONSERVATION";
 
 export interface IWork {
@@ -13,7 +13,6 @@ export interface IWork {
   device_coord: [x: string, y: string];
   pictures: string[];
   created_at: string;
-  
   reflector?: Reflector
 }
 

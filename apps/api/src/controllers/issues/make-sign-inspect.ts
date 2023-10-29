@@ -6,7 +6,7 @@ import { WorkReflectorRepositoryInMemory } from "../../core/repositories/inmemor
 import { MakeSignInspectUseCase } from "../../core/usecases/make-sign-inspect";
 import { SignRepositoryInMemory } from "../../core/repositories/inmemory-impl/sign-repository";
 import { z } from "zod";
-import { UnprocessableEntity } from "../../core/errors/bad-request copy";
+import { UnprocessableEntity } from "../../core/errors/unprocessable-entity";
 import {
   IReflectorMeasurements,
   ReflectorMeasures,
@@ -16,7 +16,7 @@ const bodyParser = z.object({
   author_name: z.string(),
   device_coord: z.tuple([z.string(), z.string()]),
   pictures: z.array(z.string()),
-  status: z.enum(["DEMAGED", "LOW_REFLETANCE", "OK"]),
+  status: z.enum(["DAMAGE", "LOW_REFLETANCE", "OK"]),
   work_type: z.enum(["MONITORING", "CONSERVATION"]),
   code: z.string(),
   direction: z.enum(["NORTH", "SOUTH"]),

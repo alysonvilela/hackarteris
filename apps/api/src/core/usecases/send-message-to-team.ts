@@ -1,52 +1,66 @@
-// import { TeamRepository } from "../repositories/team-repository";
-// import { ChargeRepository } from "../repositories/charge-repository";
-// import { makeMessage } from "../../utils/make-message";
-// import { HttpClient } from "../../adapters/http-client";
-// import { ServiceOwnerRepository } from "../repositories/service-owners-repository";
+import { TeamRepository } from "../repositories/team-repository";
+import { makeMessage } from "../../utils/make-message";
+import { HttpClient } from "../../adapters/http-client";
+import { WorkReflectorRepository } from "../repositories/work-reflector-repository";
+import { ResourceNotFound } from "../errors/not-found";
 
-// interface UsecaseResquest {
-//   charge_id: string;
-// }
+interface SendMessageToTeamRequest {
+  work_id: string;
+  team_id: string;
+}
 
-// export class SendMessageToTeamsUseCase {
-//   constructor(
-//     // private readonly queue: TeamRepository,
-//     private readonly httpClient: HttpClient,
-//     private readonly serviceOwnerRepository: ServiceOwnerRepository,
-//     private readonly chargeRepository: ChargeRepository,
-//     private readonly teamRepository: TeamRepository
-//   ) {}
+interface RegisterTeamResponse {
+  body?: ResourceNotFound;
+  status: 200 | 404 | 500;
+}
+export class SendMessageToTeamUseCase {
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly workReflectorRepository: WorkReflectorRepository,
+    private readonly teamRepository: TeamRepository
+  ) {}
 
-//   async execute(req: UsecaseResquest): Promise<void> {
-//     const charge = await this.chargeRepository.queryById(req.charge_id);
+  async execute(req: SendMessageToTeamRequest): Promise<RegisterTeamResponse> {
+    try {
+      const existantTeam = await this.teamRepository.queryById(req.team_id);
 
-//     if (charge) {
-//       const chargeTeam = await this.teamRepository.queryByChargeId(charge.flatted.id);
-//       const owner = await this.serviceOwnerRepository.queryById(charge.flatted.owner_id);
-//       if (chargeTeam) {
-//         const valueForEachMember =
-//           charge.flatted.service.value / chargeTeam.flatted.members.length
+      if (!existantTeam) {
+        return {
+          status: 404,
+          body: new ResourceNotFound(),
+        };
+      }
 
-//         const message = makeMessage({
-//           customMessage: charge.flatted.custom_message ?? null,
-//           serviceName: charge.flatted.service.name,
-//           value: valueForEachMember,
-//           pixKey: owner?.flatted.pix_key ?? "vc sabe qual eh otari0!",
-//         });
+      const work = await this.workReflectorRepository.queryByWorkId(
+        req.work_id
+      );
       
-//         for (const member of chargeTeam.flatted.members) {
-//           await this.httpClient.request.get(
-//             `${process.env.WHATSAPP_BASE_URL}/api/sendText`,
-//             {
-//               params: {
-//                 phone: member.flatted.phone,
-//                 text: message,
-//                 session: 'default'
-//               }
-//             }
-//           );
-//         }
-//       }
-//     }
-//   }
-// }
+      if (!work) {
+        return {
+          status: 404,
+          body: new ResourceNotFound(),
+        };
+      }
+
+      await this.httpClient.request.post(
+        `${
+          process.env.WHATSAPP_BASE_URL ?? "http://localhost:3002"
+        }/api/sendText`,
+        {
+          chatId: existantTeam?.flatted.wp_group_id,
+          text: makeMessage({ work }),
+          session: "default",
+        }
+      );
+
+      return {
+        status: 200,
+      };
+    } catch (err) {
+      console.log({ err });
+      return {
+        status: 500,
+      };
+    }
+  }
+}
