@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { issues } from "./controllers/issues/route";
 import { teams } from "./controllers/team/route";
+import { works } from "./controllers/work/route";
 
 export const createServer = () => {
   const app = express();
@@ -15,6 +16,7 @@ export const createServer = () => {
     .use(cors())
     .use(issues)
     .use(teams)
+    .use(works)
     .get("/message/:name", (req, res) => {
       return res.json({ message: `hello ${req.params.name}` });
     })
