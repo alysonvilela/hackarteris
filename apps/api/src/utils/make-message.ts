@@ -7,7 +7,7 @@ interface MakeMessageParams {
 
 const translateStatus = {
   'DAMAGE': 'Danificado / Vandalizado',
-  'LOW_REFLETANCE': 'Refletancia',
+  'LOW_REFLETANCE': 'Baixa refletancia',
 }
 
 const translateColors = {
@@ -35,6 +35,8 @@ export const makeMessage = (params: MakeMessageParams) => {
 *Cores a serem trocadas*: ${params.work.flatted.reflector?.flatted.measurements
   .reduce((prev, curr) => `${prev ? `${prev},` : ''} ${translateColors[curr.flatted.color]}`, '')}
 *Direção do Percurso*: ${translateDirection[params.work.flatted.reflector?.flatted.direction!]}
+
+*Link de resolucao*: http://localhost:3000/dashboard/issues/${params.work.id}
 
 Por favor, atendam a esta ocorrência o mais rápido possível.
 `;
