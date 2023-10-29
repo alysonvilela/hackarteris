@@ -17,22 +17,29 @@ export const DashboardHome = ({ issues }: { issues: Flatted<IWork>[] }) => {
     cards.push(index);
   }
   return (
-    <div className="flex flex-wrap gap-4">
-      {issues.map(({ id, sign_id, author, status, reflector, pictures }) => {
-        const local = reflector?.flatted?.kilometer_position;
-        return (
-          <SignCard
-            key={id}
-            picture={pictures[0]}
-            status={status}
-            sign_id={sign_id}
-            author={author}
-            cardId={id}
-            local={local}
-            onClick={() => router.push(`/dashboard/issue/${id}`)}
-          />
-        );
-      })}
-    </div>
+    <>
+      <div className="m-4">
+        <h1 className="text-3xl font-bold">Chamados em aberto</h1>
+        <h3>Placas com problemas</h3>
+      </div>
+      <hr />
+      <div className="flex flex-wrap gap-4 mt-8">
+        {issues.map(({ id, sign_id, author, status, reflector, pictures }) => {
+          const local = reflector?.flatted?.kilometer_position;
+          return (
+            <SignCard
+              key={id}
+              picture={pictures[0]}
+              status={status}
+              sign_id={sign_id}
+              author={author}
+              cardId={id}
+              local={local}
+              onClick={() => router.push(`/dashboard/issue/${id}`)}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
