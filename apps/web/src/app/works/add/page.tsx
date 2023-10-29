@@ -40,7 +40,7 @@ const profileFormSchema = z.object({
   measurements: z.array(
     z.object({
       color: z.string(),
-      measures: z.array(z.string().optional()),
+      measures: z.array(z.string()),
       average: z.string(),
       minimumValue: z.string(),
       filmType: z.string(),
@@ -59,7 +59,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   direction: '',
   kilometerPosition: '',
   measurements: [
-    { color: '', measures: [0, 0, 0, 0, 0], average: 0, minimumValue: 0, filmType: '' },
+    { color: '', measures: ['', '', '', '', ''], average: '', minimumValue: '', filmType: '' },
   ],
 };
 
