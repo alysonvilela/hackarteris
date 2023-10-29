@@ -6,7 +6,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang="en">
       <body>
         <div className="flex">
           <main className="p-2 container mx-auto">{children}</main>

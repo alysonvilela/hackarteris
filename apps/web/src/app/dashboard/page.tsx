@@ -11,8 +11,6 @@ export default async function Dashboard() {
 
   const data = await response.json();
 
-  console.log(data);
-
   return (
     <>
       <DashboardHome issues={data} />;

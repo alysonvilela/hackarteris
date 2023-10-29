@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import { PersonIcon, SewingPinIcon } from '@radix-ui/react-icons';
@@ -6,6 +7,9 @@ import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import axios from 'axios';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
+import { useState } from 'react';
 
 interface SignCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardId: string;
@@ -32,6 +36,24 @@ export function SignCard({
     OK: 'Normal',
   };
 
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const sendMessage = async () => {
+    const { data } = await axios.get('http://localhost:3001/team/all', {
+      headers: { 'x-api-key': '12345' },
+    });
+    console.log(data);
+    const teamId = await data[0].id;
+    await axios.post(
+      `http://localhost:3001/issues/call/${cardId}/${teamId}`,
+      {},
+      {
+        headers: { 'x-api-key': '12345' },
+      }
+    );
+    setModalOpen(true);
+  };
+
   const currentStatus = statusParser[status];
 
   return (
@@ -39,6 +61,17 @@ export function SignCard({
       className={cn('space-y-3 border-[1px] border-slate-100 min-w-[320px] rounded-lg ', className)}
       {...props}
     >
+      <Dialog open={modalOpen}>
+        <DialogContent className="w-5/6 rounded-md">
+          <DialogHeader className="my-6 gap-4">
+            <DialogTitle>Ocorrência enviada!</DialogTitle>
+            <DialogDescription>
+              Sua ocorrência foi enviada para o time responsável! ✅
+            </DialogDescription>
+            <Button onClick={() => setModalOpen(false)}>Continuar</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
       <div
         className={
           'overflow-hidden rounded-full relative w-full max-w-[160px] max-h-[160px] mt-4 m-auto  '
@@ -61,17 +94,26 @@ export function SignCard({
           <SewingPinIcon />
           <span>{local}</span>
         </p>
-        <Badge className=" min-w-fit" variant={status}>
+        <Badge className="min-w-fit" variant={status}>
           {currentStatus}
         </Badge>
 
-        <Button
-          onClick={onClick}
-          variant="ghost"
-          className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
-        >
-          Informações
-        </Button>
+        <div className="flex">
+          <Button
+            onClick={onClick}
+            variant="ghost"
+            className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
+          >
+            Informações
+          </Button>
+          <Button
+            onClick={sendMessage}
+            variant="ghost"
+            className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
+          >
+            Enviar chamado
+          </Button>
+        </div>
       </div>
     </div>
   );

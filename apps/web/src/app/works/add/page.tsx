@@ -53,7 +53,7 @@ const addWorkFormSchema = z.object({
       average: z.string().optional(),
       minimum_value: z.string(),
       film_type: z.string(),
-    }),
+    })
   ),
 });
 
@@ -82,7 +82,6 @@ export default function AddWork() {
       direction: data.direction,
       kilometer_position: data.kilometer_position,
       measurements: data.measurements.map((measure) => {
-        console.log(measure);
         return {
           color: measure.color,
           film_type: measure.film_type,
@@ -91,7 +90,6 @@ export default function AddWork() {
         };
       }),
     };
-    console.log('here', body);
     try {
       await axios.post(`http://localhost:3001/sign/${data.ra}`, body, {
         headers: { 'x-api-key': '12345' },
