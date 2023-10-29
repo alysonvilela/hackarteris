@@ -9,5 +9,4 @@ works.get(
     await getSingleWork.handler(request, response, next)
 );
 
-
 export { works };

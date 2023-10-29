@@ -1,6 +1,6 @@
 import { Flatted } from "../base/entity";
 import { IWork } from "../domains/work";
-import { ConflictError } from "../errors/conflict-error";
+import { BadRequest } from "../errors/bad-request";
 import { WorkReflectorRepository } from "../repositories/work-reflector-repository";
 
 interface GetWorkRequest {
@@ -8,7 +8,7 @@ interface GetWorkRequest {
 }
 
 interface GetWorkResponse {
-  body: Flatted<IWork> | ConflictError
+  body: Flatted<IWork> | BadRequest
   status: 200 | 409;
 }
 
@@ -22,7 +22,7 @@ export class GetWorkUseCase {
 
     if(!existing) {
       return {
-        body: new ConflictError(),
+        body: new BadRequest(),
         status: 409
       }
     }
