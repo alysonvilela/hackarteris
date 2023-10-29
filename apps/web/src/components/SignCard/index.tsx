@@ -18,7 +18,14 @@ interface SignCardProps extends React.HTMLAttributes<HTMLDivElement> {
   author: string;
   status: 'LOW_REFLETANCE' | 'OK' | 'DAMAGE';
   local: string | undefined;
+  picture: string;
 }
+
+export const statusParser = {
+  LOW_REFLETANCE: 'Reflexo Baixo',
+  DAMAGE: 'Danificada',
+  OK: 'Normal',
+};
 
 export function SignCard({
   className,
@@ -28,6 +35,7 @@ export function SignCard({
   author,
   sign_id,
   status,
+  picture,
   ...props
 }: SignCardProps) {
   const statusParser = {
@@ -78,7 +86,7 @@ export function SignCard({
         }
       >
         <img
-          src={'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80'}
+          src={picture}
           alt="dsadsa"
           className={cn('h-auto w-auto object-cover transition-all hover:scale-105 ')}
         />

@@ -1,19 +1,12 @@
+import { getIssues } from '@/lib/requets/get-issues';
 import { DashboardHome } from '@/screens/Dashboard/DashboardHome';
 import axios from 'axios';
 import { Suspense } from 'react';
 
 export default async function Dashboard() {
-  const response = await fetch('http://localhost:3001/issues', {
-    headers: {
-      'x-api-key': 'dsadsadsa',
-    },
-  });
+  const data = await getIssues();
 
-  const data = await response.json();
+  console.log(data);
 
-  return (
-    <>
-      <DashboardHome issues={data} />;
-    </>
-  );
+  return <>{!data ? <div>sem issues</div> : <DashboardHome issues={data} />}</>;
 }

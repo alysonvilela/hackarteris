@@ -1,11 +1,10 @@
 'use client';
 
 import { SignCard } from '@/components/SignCard';
+import { Flatted } from '@/core/base/entity';
+import { IWork } from '@/core/domains/work';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-
-import type { IWork } from '../../../../../api/src/core/domains/work';
-import type { Flatted } from '../../../../../api/src/core/base/entity';
 
 export const DashboardHome = ({ issues }: { issues: Flatted<IWork>[] }) => {
   const router = useRouter();
@@ -19,11 +18,12 @@ export const DashboardHome = ({ issues }: { issues: Flatted<IWork>[] }) => {
   }
   return (
     <div className="flex flex-wrap gap-4">
-      {issues.map(({ id, sign_id, author, status, reflector }) => {
-        const local = reflector?.props?.kilometer_position;
+      {issues.map(({ id, sign_id, author, status, reflector, pictures }) => {
+        const local = reflector?.flatted?.kilometer_position;
         return (
           <SignCard
             key={id}
+            picture={pictures[0]}
             status={status}
             sign_id={sign_id}
             author={author}
