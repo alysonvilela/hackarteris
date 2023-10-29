@@ -8,10 +8,10 @@ const handler: Handler = async (req, res) => {
   const headerDto = headerSchema.safeParse(req.headers);
 
   if (!headerDto.success) {
-    return res.json(new BadRequest()).status(400)
+    return res.json(new BadRequest()).status(400);
   }
   const result = await new GetIssuesUseCase(
-    WorkReflectorRepositoryInMemory.getInstance()
+    WorkReflectorRepositoryInMemory.getInstance(),
   ).execute({});
 
   return res.json(result.body).status(result.status);

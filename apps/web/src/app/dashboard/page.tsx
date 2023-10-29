@@ -1,24 +1,21 @@
-'use client';
+import { DashboardHome } from '@/screens/Dashboard/DashboardHome';
+import axios from 'axios';
+import { Suspense } from 'react';
 
-import { SignCard } from '@/components/SignCard';
-import { useRouter } from 'next/router';
+export default async function Dashboard() {
+  const response = await fetch('http://localhost:3001/issues', {
+    headers: {
+      'x-api-key': 'dsadsadsa',
+    },
+  });
 
-export default function Dashboard() {
-  const cards = [];
+  const data = await response.json();
 
-  const maxNumOfCards = 10;
-
-  for (let index = 0; index < maxNumOfCards; index++) {
-    cards.push(index);
-  }
-
-  console;
+  console.log(data);
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {cards.map((_, i) => {
-        return <SignCard key={i} cardId={i} />;
-      })}
-    </div>
+    <>
+      <DashboardHome issues={data} />;
+    </>
   );
 }

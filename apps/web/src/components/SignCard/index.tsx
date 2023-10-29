@@ -1,24 +1,49 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import { FileTextIcon } from '@radix-ui/react-icons';
-import { SewingPinIcon } from '@radix-ui/react-icons';
+import { PersonIcon, SewingPinIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
-import { useRouter, useSearchParams } from 'next/navigation';
-import useQueryParams from '@/hooks/useQueryParams';
+import { Badge } from '../ui/badge';
 
 interface SignCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  cardId: number;
+  cardId: string;
+  onClick: () => void;
+  sign_id: string;
+  author: string;
+  status: 'LOW_REFLETANCE' | 'OK' | 'DAMAGE';
+  local: string | undefined;
 }
 
-export function SignCard({ className, cardId, ...props }: SignCardProps) {
-  const { setQueryParams } = useQueryParams();
+export function SignCard({
+  className,
+  cardId,
+  local,
+  onClick,
+  author,
+  sign_id,
+  status,
+  ...props
+}: SignCardProps) {
+  const statusParser = {
+    LOW_REFLETANCE: 'Reflexo Baixo',
+    DAMAGE: 'Danificada',
+    OK: 'Normal',
+  };
+
+  const currentStatus = statusParser[status];
 
   return (
-    <div className={cn('space-y-3 border-[1px] border-slate-100 ', className)} {...props}>
-      <div className={'overflow-hidden rounded-md relative w-full h-auto max-w-xs max-h-60'}>
+    <div
+      className={cn('space-y-3 border-[1px] border-slate-100 min-w-[320px] rounded-lg ', className)}
+      {...props}
+    >
+      <div
+        className={
+          'overflow-hidden rounded-full relative w-full max-w-[160px] max-h-[160px] mt-4 m-auto  '
+        }
+      >
         <img
           src={'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80'}
           alt="dsadsa"
@@ -26,20 +51,24 @@ export function SignCard({ className, cardId, ...props }: SignCardProps) {
         />
       </div>
 
-      <div className="space-y-1 text-md p-2 flex flex-col">
-        <h3 className="font-medium leading-none mb-2">Placa</h3>
-        <p className="text-xs text-muted-foreground mb-8 flex gap-2">
-          <FileTextIcon />
-          <span>Descrição</span>
+      <div className="text-md  flex flex-col items-center">
+        <h3 className=" leading-none mb-2 font-semibold">{sign_id}</h3>
+        <p className="text-xs text-muted-foreground mb-2 flex gap-2 ">
+          <PersonIcon />
+          <span>{author}</span>
         </p>
-        <p className="text-xs text-muted-foreground mb-8 flex gap-2">
+        <p className="text-xs text-muted-foreground mb-2 flex gap-2">
           <SewingPinIcon />
-          <span>Local</span>
+          <span>{local}</span>
         </p>
+        <Badge className=" min-w-fit" variant={status}>
+          {currentStatus}
+        </Badge>
 
         <Button
-          onClick={() => setQueryParams({ selected_sign: cardId })}
-          className="max-w-[156px] self-end"
+          onClick={onClick}
+          variant="ghost"
+          className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
         >
           Informações
         </Button>

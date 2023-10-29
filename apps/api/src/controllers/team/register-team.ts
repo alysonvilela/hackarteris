@@ -17,6 +17,8 @@ const handler: Handler = async (req, res) => {
   const bodyDto = bodyParser.safeParse(req.body);
   const headerDto = headerSchema.safeParse(req.headers);
 
+  console.log(req.body)
+
   if (!bodyDto.success) {
     return res.json(new UnprocessableEntity()).status(422)
   }
@@ -30,6 +32,7 @@ const handler: Handler = async (req, res) => {
     group_id: bodyDto.data.groupId,
     name: bodyDto.data.name
   });
+  console.log(result)
 
   return res.json(result.body).status(result.status);
 };
