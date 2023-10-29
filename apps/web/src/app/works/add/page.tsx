@@ -24,6 +24,16 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import axios from 'axios';
+import { Modal } from '@/components/Modal';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { useState } from 'react';
 
 const addWorkFormSchema = z.object({
   ra: z
@@ -77,7 +87,6 @@ export default function AddWork() {
           color: measure.color,
           film_type: measure.film_type,
           measures: measure.measures.map((measure) => Number(measure)),
-          average: Number(measure.average),
           minimum_value: Number(measure.minimum_value),
         };
       }),
@@ -87,18 +96,31 @@ export default function AddWork() {
       await axios.post(`http://localhost:3001/sign/${data.ra}`, body, {
         headers: { 'x-api-key': '12345' },
       });
+      setModalOpen(true);
     } catch (error) {
       console.error(error);
     }
   }
 
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   const { fields, append } = useFieldArray({
     name: 'measurements',
     control: form.control,
   });
-
   return (
     <Form {...form}>
+      <h1 className="font-bold text-2xl uppercase my-4">Reportar placa</h1>
+      <Dialog open={modalOpen}>
+        <DialogContent className="w-5/6 rounded-md">
+          <DialogHeader className="my-6 gap-4">
+            <DialogTitle>Placa reportada</DialogTitle>
+            <DialogDescription>Obrigado! Sua placa foi reportada com sucesso! ✅</DialogDescription>
+            <Button onClick={() => setModalOpen(false)}>Continuar</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
@@ -258,36 +280,20 @@ export default function AddWork() {
                   </FormItem>
                 )}
               />
-              <div className="flex justify-between gap-4">
-                <FormField
-                  control={form.control}
-                  name={`measurements.${index}.average`}
-                  key={`${field.id}.${index}.average`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Média</FormLabel>
-                      <FormControl>
-                        <Input type="string" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={`measurements.${index}.minimum_value`}
-                  key={`${field.id}.${index}.minimum_value`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor mínimo</FormLabel>
-                      <FormControl>
-                        <Input type="string" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name={`measurements.${index}.minimum_value`}
+                key={`${field.id}.${index}.minimum_value`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Valor mínimo</FormLabel>
+                    <FormControl>
+                      <Input type="string" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <div className="flex gap-4 justify-between">
                 <FormField
                   control={form.control}
@@ -367,7 +373,7 @@ export default function AddWork() {
             variant="outline"
             size="sm"
             disabled={false}
-            className="mt-2"
+            className="mt-2 w-full"
             onClick={() =>
               append({
                 color: 'YELLOW',
@@ -381,7 +387,9 @@ export default function AddWork() {
             Adicionar medida
           </Button>
         </div>
-        <Button type="submit">Reportar placa</Button>
+        <Button type="submit" className="w-full">
+          Reportar placa
+        </Button>
       </form>
     </Form>
   );

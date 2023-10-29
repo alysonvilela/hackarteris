@@ -1,5 +1,3 @@
-import { CardDescription } from '@/components/CardDescription';
-import { Sidebar } from '@/components/SideMenu';
 import '@/styles/globals.css';
 
 export default function MainLayout({
@@ -12,7 +10,6 @@ export default function MainLayout({
       <body>
         <div className="flex">
           <main className="p-2 container mx-auto">{children}</main>
-          <CardDescription />
         </div>
       </body>
     </html>
