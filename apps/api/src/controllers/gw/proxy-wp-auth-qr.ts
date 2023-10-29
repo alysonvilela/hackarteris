@@ -100,3 +100,8 @@ export const handler: Handler = async (req, res) => {
       image: base64String,
   }).status(200)
 };
+
+
+export const proxyWahaAuthQr = {
+  handler,
+};

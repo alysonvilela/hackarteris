@@ -28,7 +28,7 @@ export class WorkReflectorRepositoryInMemory implements WorkReflectorRepository 
   }
 
   async queryIssueds(): Promise<Work[]> {
-    const filteredList = this.db.filter((i) => i.flatted.status === 'DEMAGED' || i.flatted.status === 'LOW_REFLETANCE')
+    const filteredList = this.db.filter((i) => i.flatted.status === 'DAMAGE' || i.flatted.status === 'LOW_REFLETANCE')
 
     return filteredList
   }

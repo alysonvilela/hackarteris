@@ -45,3 +45,7 @@ export const handler: Handler = async (req, res) => {
     ...response,
   }).status(200)
 };
+
+export const proxyWahaCurrentSession = {
+  handler,
+};
