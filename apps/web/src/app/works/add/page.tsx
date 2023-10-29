@@ -71,7 +71,7 @@ export default function AddWork() {
 
   async function onSubmit(data: AddWorkValues) {
     const body = {
-      author_name: 'John Doe', // Passado diretamente
+      author_name: 'Equipe 04', // Passado diretamente
       device_coord: ['10.1234', '20.5678'], // Passado diretamente
       pictures: [
         'https://cdn.autopapo.com.br/box/uploads/2018/08/29144427/shutterstock_520257244.jpg',
