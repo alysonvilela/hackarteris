@@ -1,10 +1,15 @@
-const path = require("path");
-
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
-  output: "standalone",
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, "../../"),
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+      },
+    ],
   },
-};
+}
+
+module.exports = nextConfig
