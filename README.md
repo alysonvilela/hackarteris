@@ -12,6 +12,7 @@ Todo processo de armazenamento de dados está sendo feito em memória pois não 
 
 ## Tecnologias utilizadas
 - Express
+- Domain Driven Design
 - Zod para DTOs
 - Next.js
 - Shadcn-ui
