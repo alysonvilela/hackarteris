@@ -16,9 +16,9 @@ Plataforma para monitoramento e gestão da refletância de placas usando intelig
 - Use o comando `yarn install` no terminal, isso fará com que a imagem Docker suba e as dependências sejam instaladas.
 - Use o comando `yarn dev` para rodar o projeto em ambiente de desenvolvimento.
 
-Para acessar o backend, acesse *http://localhost:3001*
-Para acessar o frontend, acesse *http://localhost:3000*
-Para acessar a API integrada com whatsapp, acesse *http://localhost:3002*
+<p>Para acessar o backend, acesse *http://localhost:3001*</p>
+<p>Para acessar o frontend, acesse *http://localhost:3000*</p>
+<p>Para acessar a API integrada com whatsapp, acesse *http://localhost:3002*</p>
 
 ## 🌱 Rotas Backend
 
