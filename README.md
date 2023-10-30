@@ -1,13 +1,36 @@
 # Roadlab 
 
 Plataforma para monitoramento e gestão da refletância de placas usando inteligência artificial.
-
+Com esse projeto entendemos que há viabilidade para inserção de inteligência artificial e machine learning voltado para o campo de inspeção de dados retro-refletivos e segurança rodoviária.
+Todo processo de armazenamento de dados está sendo feito em memória pois não há necessidade do armazemento em um banco de dados real.
 
 ## ⚙️ Requirementos para funcionar
 
 - 🐋 Docker
 - 🟢 Node
 - 📦 Yarn
+
+## Tecnologias utilizadas
+- Express
+- Zod para DTOs
+- Next.js
+- Shadcn-ui
+- Tailwindcss
+- Typescript
+- Turbo Repo
+- Roboflow
+- Figma
+
+## 🚀 Funcionalidades atuais
+Serviços (backend + frontend)
+- Exibir qr-code do WhatsApp para disparo de mensagens
+- Registrar time/grupo
+- Listar times/grupos registrados
+- Registrar relatório (inspeção/manutenção) de placas retro-refletoras
+- Visualizar ocorrências
+- Visualizar detalhe de ocorrência
+- Enviar ocorrência para time específico
+
 
 ## 🚀 Como rodar o projeto
 
@@ -27,3 +50,7 @@ Plataforma para monitoramento e gestão da refletância de placas usando intelig
 - POST: /team/register -> Registra um time para receber os alertas.
 - GET: /team/all -> Retornas os times existentes que podem receber os alertas.
 - POST: /sign/{{sign_id}} -> Cadastra uma nova placa no sistema ou atualiza uma existente.
+
+Ou
+
+Use a collection do postman localizado `ROAD-LABS.postman_collection.json`
