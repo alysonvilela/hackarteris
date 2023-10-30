@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "2ccacd79-e84c-4bf2-b7b3-be42acd082cc",
+		"name": "ROAD-LABS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24822121"
+	},
+	"item": [
+		{
+			"name": "[ROAD-LABS] [WP] Base64 QR Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/wp/qr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"wp",
+						"qr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] Get issues",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/issues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] Send issue to Team",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/issues/call/{{work_id}}/{{team_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues",
+						"call",
+						"{{work_id}}",
+						"{{team_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] Get work",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/issues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] List all whatsapp team group",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/team/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"team",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] Register whatsapp team",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"team_id\", pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"groupId\": \"120363194909444207@g.us\",\n    \"name\": \"Time KM 50 - 200\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/team/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"team",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ROAD-LABS] Make sign inspect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"work_id\", pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1231231231asfcdasd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"author_name\": \"John Doe\",\n  \"device_coord\": [\"10.1234\", \"20.5678\"],\n  \"pictures\": [\"image1.jpg\", \"image2.jpg\", \"image3.jpg\"],\n  \"status\": \"DAMAGE\",\n  \"work_type\": \"MONITORING\",\n  \"code\": \"ABC123\",\n  \"direction\": \"NORTH\",\n  \"kilometer_position\": \"KM123\",\n  \"measurements\": [\n    {\n      \"color\": \"YELLOW\",\n      \"measures\": [1.2, 3.4, 2.5, 1.8],\n      \"average\": 2.47,\n      \"minimum_value\": 1.2,\n      \"film_type\": \"Type A\"\n    },\n    {\n      \"color\": \"WHITE\",\n      \"measures\": [2.5, 2.7, 2.4, 2.8],\n      \"average\": 2.6,\n      \"minimum_value\": 2.4,\n      \"film_type\": \"Type B\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/sign/teste",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"sign",
+						"teste"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
