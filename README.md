@@ -1,70 +1,29 @@
-# Turborepo Docker starter
+# Roadlab 
 
-This is an official Docker starter Turborepo.
+Plataforma para monitoramento e gestão da refletância de placas usando inteligência artificial.
 
-## Using this example
 
-Run the following command:
+## ⚙️ Requirementos para funcionar
 
-```sh
-npx create-turbo@latest -e with-docker
-```
+- 🐋 Docker
+- 🟢 Node
+- 📦 Yarn
 
-## What's inside?
+## 🚀 Como rodar o projeto
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following packages/apps:
+- Clone esse projeto.
+- Certifique-se de que o Docker está funcionando corretamente
+- Use o comando `yarn install` no terminal, isso fará com que a imagem Docker suba e as dependências sejam instaladas.
+- Use o comando `yarn dev` para rodar o projeto em ambiente de desenvolvimento.
 
-### Apps and Packages
+Para acessar o backend, acesse *http://localhost:3001*
+Para acessar o frontend, acesse *http://localhost:3000*
+Para acessar a API integrada com whatsapp, acesse *http://localhost:3002*
 
-- `web`: a [Next.js](https://nextjs.org/) app
-- `api`: an [Express](https://expressjs.com/) server
-- `ui`: ui: a React component library
-- `eslint-config-custom`: `eslint` configurations for client side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `eslint-config-custom-server`: `eslint` configurations for server side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `scripts`: Jest configurations
-- `logger`: Isomorphic logger (a small wrapper around console.log)
-- `tsconfig`: tsconfig.json;s used throughout the monorepo
+## 🌱 Rotas Backend
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Docker
-
-This repo is configured to be built with Docker, and Docker compose. To build all apps in this repo:
-
-```
-# Create a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-docker network create app_network
-
-# Build prod using new BuildKit engine
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build
-
-# Start prod in detached mode
-docker-compose -f docker-compose.yml up -d
-```
-
-Open http://localhost3010.
-
-To shutdown all running containers:
-
-```
-# Stop all running containers
-docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
-```
-
-### Remote Caching
-
-This example includes optional remote caching. In the Dockerfiles of the apps, uncomment the build arguments for `TURBO_TEAM` and `TURBO_TOKEN`. Then, pass these build arguments to your Docker build.
-
-You can test this behavior using a command like:
-
-`docker build -f apps/web/Dockerfile . --build-arg TURBO_TEAM=“your-team-name” --build-arg TURBO_TOKEN=“your-token“ --no-cache`
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+- GET: /issues -> Retorna uma lista com todas as placas com problemas.
+- POST: /issues/call/{{work_id}}/{{team_id}} -> Envia uma mensagem no WhatsApp com uma nova ocorrência.
+- POST: /team/register -> Registra um time para receber os alertas.
+- GET: /team/all -> Retornas os times existentes que podem receber os alertas.
+- POST: /sign/{{sign_id}} -> Cadastra uma nova placa no sistema ou atualiza uma existente.
