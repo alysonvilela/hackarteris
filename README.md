@@ -4,6 +4,27 @@ Plataforma para monitoramento e gestão da refletância de placas usando intelig
 Com esse projeto entendemos que há viabilidade para inserção de inteligência artificial e machine learning voltado para o campo de inspeção de dados retro-refletivos e segurança rodoviária.
 Todo processo de armazenamento de dados está sendo feito em memória pois não há necessidade do armazemento em um banco de dados real.
 
+## Fluxo da ideia
+```mermaid
+sequenceDiagram
+    Monitoramento->>+Software: Relatório de inspeção
+    Software-->>+IA: Envia dados para treinamento
+    Software-->>+Gerencia: Armazena dados e exibe no dashboard
+    Gerencia->>+Software: Ocorrência na posição X, Y, link
+    Software->>+Conservacao: Alerta no Whatsapp
+    Conservacao->>+Software: Relatório de inspeção + Manutenção
+    Software->>+IA: Envia dados para treinamento
+    Software->>+Gerencia: Atualiza lista de chamados
+    Note over Monitoramento,Hardware: Com a IA Treinada, começam as rodadas com câmeras acopladas
+    Hardware->>+IA: Video
+    IA-->>+Hardware: Validações de reconhecimento de placas e refletancia
+    alt Confiabilidade altissima
+        Hardware->>Software: Abre chamados para manutenção indicando que eh a IA
+    else Confiabilidade baixa
+        Hardware->>Software: Adiciona a lista de nao treinados
+    end
+```
+
 ## ⚙️ Requirementos para funcionar
 
 - 🐋 Docker
