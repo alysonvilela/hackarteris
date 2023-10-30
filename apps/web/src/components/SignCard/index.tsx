@@ -80,15 +80,11 @@ export function SignCard({
           </DialogHeader>
         </DialogContent>
       </Dialog>
-      <div
-        className={
-          'overflow-hidden rounded-full relative w-full max-w-[160px] max-h-[160px] mt-4 m-auto  '
-        }
-      >
+      <div className={'overflow-hidden rounded-full relative w-fit  mt-4 m-auto  '}>
         <img
           src={picture}
           alt="dsadsa"
-          className={cn('h-auto w-auto object-cover transition-all hover:scale-105 ')}
+          className={cn('h-[120px] w-[120px] object-cover transition-all hover:scale-105 ')}
         />
       </div>
 
