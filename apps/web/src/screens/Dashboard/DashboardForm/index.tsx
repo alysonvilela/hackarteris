@@ -113,7 +113,7 @@ export const DashboardForm = ({ issue }: DashboardIssuesProps) => {
     <Form {...form}>
       {/* <h1 className="font-bold text-2xl uppercase my-4">Reportar placa</h1> */}
       <Dialog open={modalOpen}>
-        <DialogContent className="w-5/6 rounded-md bg-green-500">
+        <DialogContent className="w-5/6 rounded-md">
           <DialogHeader className="my-6 gap-4">
             <DialogTitle>Placa reportada</DialogTitle>
             <DialogDescription>Obrigado! Sua placa foi reportada com sucesso! ✅</DialogDescription>

@@ -3,9 +3,7 @@ import { IWork } from '@/core/domains/work';
 
 export const getIssues = async () => {
   const response = await fetch('http://localhost:3001/issues', {
-    next: {
-      revalidate: 30,
-    },
+    next: {},
     headers: {
       'x-api-key': 'dsadsadsa',
     },
