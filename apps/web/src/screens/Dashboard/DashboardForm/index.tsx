@@ -115,8 +115,8 @@ export const DashboardForm = ({ issue }: DashboardIssuesProps) => {
       <Dialog open={modalOpen}>
         <DialogContent className="w-5/6 rounded-md">
           <DialogHeader className="my-6 gap-4">
-            <DialogTitle>Placa reportada</DialogTitle>
-            <DialogDescription>Obrigado! Sua placa foi reportada com sucesso! ✅</DialogDescription>
+            <DialogTitle>Feito!</DialogTitle>
+            <DialogDescription>O ajuste da placa foi reportado com sucesso! ✅</DialogDescription>
             <Button onClick={() => setModalOpen(false)}>Continuar</Button>
           </DialogHeader>
         </DialogContent>
@@ -128,7 +128,7 @@ export const DashboardForm = ({ issue }: DashboardIssuesProps) => {
           name="pictures"
           key={'field.pictures'}
           render={() => (
-            <FormItem>
+            <FormItem className="my-8">
               <FormLabel>Fotos</FormLabel>
               <FormControl>
                 <Input type="file" multiple />
@@ -297,7 +297,7 @@ export const DashboardForm = ({ issue }: DashboardIssuesProps) => {
             Adicionar medida
           </Button>
         </div>
-        <tr className="h-[1px] max-w-[80%] w-full m-auto block bg-slate-200" />
+        {/* <tr className="h-[1px] max-w-[80%] w-full m-auto block bg-slate-200" /> */}
         <Button type="submit" className="w-full bg-green-400">
           Concluir
         </Button>
