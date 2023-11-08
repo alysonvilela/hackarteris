@@ -11,9 +11,9 @@ const badgeVariants = cva(
         default: 'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
         secondary:
           'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        DAMAGE: 'bg-red-100 border-red-500 text-red-500 hover:bg-red-100/80',
-        LOW_REFLETANCE: 'bg-yellow-100 text-yellow-500 border-yellow-500 hover:bg-yellow-100/80',
-        OK: 'border-green-400 bg-green-100 text-green-500   hover:bg-green-100/80',
+        DAMAGE: 'bg-red-50 border-red-500 text-red-900 hover:bg-red-100/80',
+        LOW_REFLETANCE: 'bg-yellow-50 text-yellow-900 border-yellow-500 hover:bg-yellow-100/80',
+        OK: 'border-green-500 bg-green-50 text-green-900 hover:bg-green-100/80',
         outline: 'text-foreground',
       },
     },

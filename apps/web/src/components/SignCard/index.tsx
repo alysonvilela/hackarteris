@@ -22,7 +22,7 @@ interface SignCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const statusParser = {
-  LOW_REFLETANCE: 'Reflexo Baixo',
+  LOW_REFLETANCE: 'Baixa refletância',
   DAMAGE: 'Danificada',
   OK: 'Normal',
 };
@@ -39,7 +39,7 @@ export function SignCard({
   ...props
 }: SignCardProps) {
   const statusParser = {
-    LOW_REFLETANCE: 'Reflexo Baixo',
+    LOW_REFLETANCE: 'Baixa Refletância',
     DAMAGE: 'Danificada',
     OK: 'Normal',
   };
@@ -66,7 +66,7 @@ export function SignCard({
 
   return (
     <div
-      className={cn('space-y-3 border-[1px] border-slate-100 min-w-[320px] rounded-lg ', className)}
+      className={cn('space-y-3 border-[1px] border-slate-50 min-w-[320px] rounded-lg ', className)}
       {...props}
     >
       <Dialog open={modalOpen}>
@@ -102,18 +102,18 @@ export function SignCard({
           {currentStatus}
         </Badge>
 
-        <div className="flex">
+        <div className="flex w-full border-t-[1px] border-slate-50 mt-8">
           <Button
             onClick={onClick}
             variant="ghost"
-            className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
+            className="w-full self-end rounded-none rounded-bl-md font-semibold"
           >
             Informações
           </Button>
           <Button
             onClick={sendMessage}
             variant="ghost"
-            className="w-full self-end border-t-[1px] border-slate-100 rounded-none mt-8 font-semibold"
+            className="w-full self-end rounded-none rounded-br-md font-semibold"
           >
             Enviar chamado
           </Button>

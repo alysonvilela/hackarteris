@@ -18,12 +18,15 @@ export const DashboardHome = ({ issues }: { issues: Flatted<IWork>[] }) => {
   }
   return (
     <>
-      <div className="m-4">
-        <h1 className="text-3xl font-bold">Chamados em aberto</h1>
-        <h3>Placas com problemas</h3>
+      <div className="p-4">
+        <h1 className="text-neutral-900 text-3xl font-bold">Chamados em aberto</h1>
+        <h3 className="text-neutral-600">Lista de placas com defeitos.</h3>
       </div>
-      <hr />
+      <hr className="border-neutral-50" />
       <div className="flex flex-wrap gap-4 mt-8">
+        {!issues.length && (
+          <p className="text-3xl w-full text-center text-neutral-300 p-4">Não há nenhum chamado no momento!</p>
+        )}
         {issues.map(({ id, sign_id, author, status, reflector, pictures }) => {
           const local = reflector?.flatted?.kilometer_position;
           return (
