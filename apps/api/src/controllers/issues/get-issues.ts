@@ -1,8 +1,8 @@
 import { Handler, Request } from "express";
-import { headerSchema } from "../../core/utils/authorization";
-import { BadRequest } from "../../core/errors/bad-request";
-import { GetIssuesUseCase } from "../../core/usecases/get-issues";
-import { WorkReflectorRepositoryInMemory } from "../../core/repositories/inmemory-impl/work-reflector-repository";
+import { headerSchema } from "core/utils/authorization";
+import { BadRequest } from "core/errors/bad-request";
+import { GetIssuesUseCase } from "core/usecases/get-issues";
+import { WorkReflectorRepositoryInMemory } from "core/repositories/inmemory-impl/work-reflector-repository";
 
 const handler: Handler = async (req, res) => {
   const headerDto = headerSchema.safeParse(req.headers);

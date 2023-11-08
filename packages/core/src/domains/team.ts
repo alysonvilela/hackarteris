@@ -1,4 +1,4 @@
-import { BaseEntity } from "../../core/base/entity";
+import { BaseEntity } from "../base/entity";
 import { Optional } from "../utils/optional";
 
 export interface ITeam {

@@ -32,6 +32,7 @@ server.listen(port, () => {
         })
       }
       console.log('WHATSAPP WAS ALREADY OPENED')
+      console.log('URL', process.env.WHATSAPP_BASE_URL)
 
     } catch (err) {
       console.log(

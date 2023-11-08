@@ -1,12 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["PORT"],
+  "globalDotEnv": [".env"],
+  "globalDependencies": [".env"],
   "pipeline": {
     "build": {
       "outputs": ["dist/**", ".next/**", "!.next/cache/**", "public/dist/**"],
       "dependsOn": ["^build"],
-      "env": ["NEXT_PUBLIC_API_HOST"]
+      "env": ["NEXT_PUBLIC_API_HOST", "WHATSAPP_BASE_URL"]
     },
     "test": {
       "outputs": ["coverage/**"],
@@ -16,6 +16,7 @@
       "dependsOn": ["^build"]
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },

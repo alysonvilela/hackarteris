@@ -1,9 +1,9 @@
-import { BaseEntity } from '../../core/base/entity';
-import { Optional } from '../../utils/optional';
-import { Reflector } from './reflector';
+import { BaseEntity } from "../base/entity";
+import { Optional } from "../utils/optional";
+import { Reflector } from "./reflector";
 
-export type WorkStatus = 'DAMAGE' | 'LOW_REFLETANCE' | 'OK';
-export type WorkType = 'MONITORING' | 'CONSERVATION';
+export type WorkStatus = "DAMAGE" | "LOW_REFLETANCE" | "OK";
+export type WorkType = "MONITORING" | "CONSERVATION";
 
 export interface IWork {
   sign_id: string;
@@ -13,11 +13,11 @@ export interface IWork {
   device_coord: [x: string, y: string];
   pictures: string[];
   created_at: string;
-  reflector?: Reflector;
+  reflector?: Reflector
 }
 
 export class Work extends BaseEntity<IWork> {
-  static create(props: Optional<IWork, 'created_at'>, id?: string) {
+  static create(props: Optional<IWork, "created_at">, id?: string) {
     const work = new Work(
       {
         ...props,
@@ -30,8 +30,8 @@ export class Work extends BaseEntity<IWork> {
   }
 
   public addReflector(reflector: Reflector) {
-    this.props.reflector = reflector;
+    this.props.reflector = reflector
 
-    return this;
+    return this
   }
 }

@@ -11,13 +11,13 @@ const fetchQr = async () => {
       },
     });
 
-      console.log({response})
+    console.log({ response });
 
     const imageBuffer = Buffer.from(response.data, "binary").toString("base64");
     return `data:${response.headers["content-type"]};base64,${imageBuffer}`;
   } catch (err) {
-    console.log('FAILED ON MAKE QR IMAGE: ', err)
-    return ''
+    console.log("FAILED ON MAKE QR IMAGE: ", err);
+    return "";
   }
 };
 
@@ -25,24 +25,27 @@ export const handler: Handler = async (req, res) => {
   try {
     const qr = await fetchQr();
 
-    if(!qr) {
-      return res.json({
-        message: 'Retry in 1 minute.'
-      }).status(120)
+    if (!qr) {
+      return res
+        .json({
+          message: "Retry in 1 minute.",
+        })
+        .status(120);
     }
 
-    return res.json({
+    return res
+      .json({
         image: qr,
-    }).status(200)
-  } catch(err) {
-    console.log('FAILED ON GET QR') 
+      })
+      .status(200);
+  } catch (err) {
+    console.log("FAILED ON GET QR");
 
     return res.status(500).json({
-      message: 'Report this ISSUE to admin.'
-    })
+      message: "Report this ISSUE to admin.",
+    });
   }
 };
-
 
 export const proxyWahaAuthQr = {
   handler,

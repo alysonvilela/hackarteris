@@ -1,11 +1,11 @@
 import { Handler, Request } from "express";
-import { headerSchema } from "../../core/utils/authorization";
-import { BadRequest } from "../../core/errors/bad-request";
-import { GetIssuesUseCase } from "../../core/usecases/get-issues";
-import { WorkReflectorRepositoryInMemory } from "../../core/repositories/inmemory-impl/work-reflector-repository";
-import { RegisterTeamUseCase } from "../../core/usecases/register-team";
-import { TeamRepositoryInMemory } from "../../core/repositories/inmemory-impl/team-repository";
-import { UnprocessableEntity } from "../../core/errors/unprocessable-entity";
+import { headerSchema } from "core/utils/authorization";
+import { BadRequest } from "core/errors/bad-request";
+import { GetIssuesUseCase } from "core/usecases/get-issues";
+import { WorkReflectorRepositoryInMemory } from "core/repositories/inmemory-impl/work-reflector-repository";
+import { RegisterTeamUseCase } from "core/usecases/register-team";
+import { TeamRepositoryInMemory } from "core/repositories/inmemory-impl/team-repository";
+import { UnprocessableEntity } from "core/errors/unprocessable-entity";
 import { z } from "zod";
 
 const bodyParser= z.object({

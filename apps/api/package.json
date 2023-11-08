@@ -6,7 +6,7 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "dev": "docker-compose up -d && nodemon --exec \"node -r esbuild-register ./src/index.ts\" -e .ts",
-    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\"",
+    "lint": "tsc --noEmit && eslint src/**/*.ts",
     "start": "node -r esbuild-register ./src/index.ts",
     "test": "jest --detectOpenHandles"
   },
@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.6.0",
     "body-parser": "^1.20.2",
+    "core": "*",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
