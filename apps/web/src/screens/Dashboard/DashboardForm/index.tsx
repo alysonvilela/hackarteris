@@ -35,8 +35,7 @@ import { useState } from 'react';
 import { DashboardIssuesProps } from '../DashboardIssue';
 
 const addWorkFormSchema = z.object({
-  // pictures: z.any(),
-
+  pictures: z.array(z.string()),
   measurements: z.array(
     z.object({
       color: z.string(),
