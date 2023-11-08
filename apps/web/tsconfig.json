@@ -20,7 +20,8 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "core/*": ["../../packages/core/dist/*"]
     },
     "plugins": [
       {

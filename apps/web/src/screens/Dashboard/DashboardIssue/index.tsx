@@ -2,8 +2,8 @@
 
 'use client';
 
-import { Flatted } from '@/core/base/entity';
-import { IWork } from '@/core/domains/work';
+import { Flatted } from 'core/base/entity';
+import { IWork } from 'core/domains/work';
 import React from 'react';
 import { PersonIcon, GlobeIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { Badge } from '@/components/ui/badge';
@@ -11,9 +11,12 @@ import { statusParser } from '@/components/SignCard';
 
 import { DashboardForm } from '../DashboardForm';
 import { Button } from '@/components/ui/button';
+import { Work } from 'core/domains/work';
+import { Reflector } from 'core/domains/reflector';
+import { GetIssuesResponse } from '@/lib/requets/get-issues';
 
 export interface DashboardIssuesProps {
-  issue: Flatted<IWork>;
+  issue: GetIssuesResponse
 }
 
 const MocketHistory = () => {
@@ -40,7 +43,15 @@ const MocketHistory = () => {
 };
 
 export const DashboardIssue = ({ issue }: DashboardIssuesProps) => {
-  const createdAt = new Date(issue.created_at).toLocaleString();
+  const {id, ...props} = issue
+
+  const reflector = new Reflector(issue.reflector.props, issue.reflector._id)
+
+  const work = new Work({
+    ...props,
+    reflector
+  }, id)
+  console.log({issue, work})
 
   return (
     <div className="w-full h-full">
@@ -52,19 +63,19 @@ export const DashboardIssue = ({ issue }: DashboardIssuesProps) => {
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center gap-2">
               <GlobeIcon />
-              <span className="text-base">{issue.reflector?.props.kilometer_position}</span>{' '}
+              <span className="text-base">{work.flatted.reflector?.flatted?.kilometer_position}</span>{' '}
             </div>
-            <h1 className="text-lg font-black">{issue.reflector.props.code}</h1>
+            <h1 className="text-lg font-black">{work.flatted.reflector?.flatted.code}</h1>
             <span className="flex items-center gap-2">
               <PersonIcon />
-              <span>{issue.author}</span>
+              <span>{work.flatted.author}</span>
             </span>
             <span className="flex items-center gap-2">
               <CalendarIcon />
-              <span>{createdAt}</span>
+              <span>{work.flatted.created_at}</span>
             </span>
-            <Badge className=" min-w-fit " variant={issue.status}>
-              {statusParser[issue.status]}
+            <Badge className=" min-w-fit " variant={work.flatted.status}>
+              {statusParser[work.flatted.status]}
             </Badge>
           </div>
         </div>
