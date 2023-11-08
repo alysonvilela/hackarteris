@@ -24,6 +24,11 @@ sequenceDiagram
         Hardware->>Software: Adiciona a lista de nao treinados
     end
 ```
+![Captura de Tela 2023-11-08 às 04 03 15](https://github.com/alysonvilela/hackarteris/assets/22202745/07efbde7-921e-46e6-8f49-6d0590f68156)
+![Captura de Tela 2023-11-08 às 04 07 10](https://github.com/alysonvilela/hackarteris/assets/22202745/88fd0426-f6d3-4511-b469-8bea9cbe19e0)
+![Captura de Tela 2023-11-08 às 04 08 34](https://github.com/alysonvilela/hackarteris/assets/22202745/41618576-2105-4dcc-b14c-220acefbc599)
+![Captura de Tela 2023-11-08 às 04 15 40](https://github.com/alysonvilela/hackarteris/assets/22202745/0cae06b9-dd45-40dc-bd8e-b27dba9cd987)
+
 
 ## ⚙️ Requirementos para funcionar
 
