@@ -62,7 +62,7 @@ Serviços (backend + frontend)
 - Use o comando `yarn dev` para rodar o projeto em ambiente de desenvolvimento.
 
 <p>Para acessar o backend, acesse <i>http://localhost:3001</i></p>
-<p>Para acessar o frontend, acesse <i>http://localhost:3000</i></p>
+<p>Para acessar o frontend, acesse <i>http://localhost:3000/dashboard</i></p>
 <p>Para acessar a API integrada com whatsapp, acesse <i>http://localhost:3002</i></p>
 
 ## 🌱 Rotas Backend

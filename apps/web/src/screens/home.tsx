@@ -60,15 +60,6 @@ export function MusicPage() {
                 <div className="h-full px-4 py-6 lg:px-8">
                   <Tabs defaultValue="music" className="h-full space-y-6">
                     <div className="space-between flex items-center">
-                      {/* <TabsList>
-                        <TabsTrigger value="music" className="relative">
-                          Music
-                        </TabsTrigger>
-                        <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
-                        <TabsTrigger value="live" disabled>
-                          Live
-                        </TabsTrigger>
-                      </TabsList> */}
                       <div className="ml-auto mr-4">
                         <Button>
                           <PlusCircleIcon className="mr-2 h-4 w-4" />
