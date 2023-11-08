@@ -1,5 +1,5 @@
 import { BaseEntity } from "../../core/base/entity";
-import { Optional } from "../../utils/optional";
+import { Optional } from "../utils/optional";
 import { Reflector } from "./reflector";
 
 export type WorkStatus = "DAMAGE" | "LOW_REFLETANCE" | "OK";

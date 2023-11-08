@@ -1,4 +1,4 @@
-import { Work } from "../core/domains/work";
+import { Work } from "../domains/work";
 import { formatCentsToReal } from "./format-from-cents-to-real";
 
 interface MakeMessageParams {

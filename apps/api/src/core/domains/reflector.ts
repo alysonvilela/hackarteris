@@ -1,5 +1,5 @@
 import { BaseEntity } from "../../core/base/entity";
-import { Optional } from "../../utils/optional";
+import { Optional } from "../utils/optional";
 import { IReflectorMeasurements, ReflectorMeasurements } from "./object-values.ts/reflectometer-measurements";
 
 export type ReflectorColor = "YELLOW" | "WHITE" | "BROWN" | "GREEN" | "RED" | "BLUE"

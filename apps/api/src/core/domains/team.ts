@@ -1,5 +1,5 @@
 import { BaseEntity } from "../../core/base/entity";
-import { Optional } from "../../utils/optional";
+import { Optional } from "../utils/optional";
 
 export interface ITeam {
   group_name: string

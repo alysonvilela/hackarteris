@@ -1,4 +1,4 @@
-import { Optional } from "../../../utils/optional";
+import { Optional } from "../../utils/optional";
 import { BaseObjectValue } from "../../base/object-value";
 import { ReflectorColor } from "../reflector";
 

@@ -1,5 +1,5 @@
 import { TeamRepository } from "../repositories/team-repository";
-import { makeMessage } from "../../utils/make-message";
+import { makeMessage } from "../utils/make-message";
 import { HttpClient } from "../../adapters/http-client";
 import { WorkReflectorRepository } from "../repositories/work-reflector-repository";
 import { ResourceNotFound } from "../errors/not-found";

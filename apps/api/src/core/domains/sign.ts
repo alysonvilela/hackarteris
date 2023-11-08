@@ -1,5 +1,5 @@
 import { BaseEntity, Flatted } from "../base/entity";
-import { Optional } from "../../utils/optional";
+import { Optional } from "../utils/optional";
 import { Work } from "./work";
 
 export interface ISign {
