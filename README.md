@@ -94,7 +94,7 @@ Use a collection do postman localizado `ROAD-LABS.postman_collection.json`
  - [Development of a neural network approach for the assessment of the performance of traffic sign retroreflectivity](https://repository.lsu.edu/cgi/viewcontent.cgi?article=1439&context=gradschool_theses)
 - [Desenvolvimento de uma base de imagens de placas de sinalização de trânsito para sistemas de reconhecimento automático](https://wiki.sj.ifsc.edu.br/index.php/Projeto_-_Desenvolvimento_de_uma_base_de_imagens_de_placas_de_sinaliza%C3%A7%C3%A3o)
 
-## Authors
+## Autores
 
 - Alyson Vilela - [@alysonvilela](https://www.github.com/alysonvilela)
 - Guilherme Vieira - [@gitlherme](https://www.github.com/gitlherme)
