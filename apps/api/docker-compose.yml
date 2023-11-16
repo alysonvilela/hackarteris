@@ -8,3 +8,11 @@ services:
     stdin_open: true
     tty: true
     container_name: whatsapp-http
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 100M
+        reservations:
+          cpus: "1.0"
+          memory: 10M
